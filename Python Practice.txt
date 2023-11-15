@@ -1,0 +1,197 @@
+#1
+def product(a, b):
+    """Return the product of a and b."""
+    return a * b
+
+# Test cases
+print(product(2, 2))    # Output: 4
+print(product(2, -2))   # Output: -4
+
+#2
+def weekday_name(day_of_week):
+    """Return the name of the weekday."""
+    if 1 <= day_of_week <= 7:
+        days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        return days[day_of_week - 1]  # Subtract 1 to account for 0-based indexing
+    else:
+        return None
+
+# Test cases
+print(weekday_name(1))  # Output: 'Sunday'
+print(weekday_name(7))  # Output: 'Saturday'
+print(weekday_name(9))  # Output: None
+print(weekday_name(0))  # Output: None
+
+#3
+def last_element(lst):
+    """Return last item in list (None if list is empty.
+    
+        >>> last_element([1, 2, 3])
+        3
+        
+        >>> last_element([]) is None
+        True
+    """
+#4
+def number_compare(a, b):
+    """Compare two numbers and return a message based on the result."""
+    if a > b:
+        return 'First is greater'
+    elif a < b:
+        return 'Second is greater'
+    else:
+        return 'Numbers are equal'
+
+# Test cases
+print(number_compare(1, 1))  # Output: 'Numbers are equal'
+print(number_compare(-1, 1))  # Output: 'Second is greater'
+print(number_compare(1, -2))  # Output: 'First is greater'
+
+#5
+def reverse_string(phrase):
+    """Reverse a string."""
+    return phrase[::-1]
+
+# Test cases
+print(reverse_string('awesome'))  # Output: 'emosewa'
+print(reverse_string('sauce'))    # Output: 'ecuas'
+
+#6
+def single_letter_count(word, letter):
+    """Count how many times the letter appears in the word (case-insensitively)."""
+    return word.lower().count(letter.lower())
+
+# Test cases
+print(single_letter_count('Hello World', 'h'))  # Output: 1
+print(single_letter_count('Hello World', 'z'))  # Output: 0
+print(single_letter_count("Hello World", 'l'))  # Output: 3
+
+#7
+def multiple_letter_count(phrase):
+    """Return dict of {ltr: frequency} from phrase.
+
+        >>> multiple_letter_count('yay')
+        {'y': 2, 'a': 1}
+
+        >>> multiple_letter_count('Yay')
+        {'Y': 1, 'a': 1, 'y': 1}
+    """
+
+    counter = {}
+
+    for ltr in phrase:
+        counter[ltr] = counter.get(ltr, 0) + 1
+
+    return counter
+
+
+#8
+def list_manipulation(lst, command, location, value=None):
+    """Mutate lst to add/remove from beginning or end."""
+    if command == 'remove':
+        if location == 'beginning':
+            if lst:
+                return lst.pop(0)
+        elif location == 'end':
+            if lst:
+                return lst.pop()
+    elif command == 'add':
+        if location == 'beginning':
+            lst.insert(0, value)
+        elif location == 'end':
+            lst.append(value)
+        return lst  # Return the modified list
+
+# Test cases
+lst = [1, 2, 3]
+
+print(list_manipulation(lst, 'remove', 'end'))  # Output: 3
+print(list_manipulation(lst, 'remove', 'beginning'))  # Output: 1
+print(lst)  # Output: [2]
+
+lst = [1, 2, 3]
+
+print(list_manipulation(lst, 'add', 'beginning', 20))  # Output: [20, 1, 2, 3]
+print(list_manipulation(lst, 'add', 'end', 30))  # Output: [20, 1, 2, 3, 30]
+print(lst)  # Output: [20, 1, 2, 3, 30]
+
+print(list_manipulation(lst, 'foo', 'end') is None)  # Output: True
+print(list_manipulation(lst, 'add', 'dunno') is None)  # Output: True
+
+#12
+def multiply_even_numbers(nums):
+    """Multiply the even numbers in the list."""
+    result = 1  # Initialize the result to 1
+    for num in nums:
+        if num % 2 == 0:  # Check if the number is even
+            result *= num  # Multiply the even number
+    return result
+
+# Test cases
+print(multiply_even_numbers([2, 3, 4, 5, 6]))  # Output: 48
+print(multiply_even_numbers([3, 4, 5]))  # Output: 4
+print(multiply_even_numbers([1, 3, 5]))  # Output: 1
+
+#13
+def capitalize(phrase):
+    """Capitalize the first letter of the first word in the phrase."""
+    if phrase:
+        return phrase[0].upper() + phrase[1:]
+    else:
+        return phrase  # Return an empty string as is
+
+# Test cases
+print(capitalize('python'))  # Output: 'Python'
+print(capitalize('only first word'))  # Output: 'Only first word'
+
+#17
+def mode(nums):
+    """Return the most common number in the list."""
+    num_count = {}  # Dictionary to store the count of each number
+
+    for num in nums:
+        num_count[num] = num_count.get(num, 0) + 1  # Increment the count
+
+    most_common = max(num_count, key=num_count.get)  # Find the number with the maximum count
+    return most_common
+
+# Test cases
+print(mode([1, 2, 1]))  # Output: 1
+print(mode([2, 2, 3, 3, 2]))  # Output: 2
+
+
+#19
+def friend_date(a, b):
+    """Check if two friends have any hobbies in common."""
+    hobbies_a = set(a[2])  # Convert the list of hobbies for friend a to a set
+    hobbies_b = set(b[2])  # Convert the list of hobbies for friend b to a set
+
+    # Check for common hobbies using set intersection
+    return bool(hobbies_a & hobbies_b)
+
+# Test cases
+elmo = ('Elmo', 5, ['hugging', 'being nice'])
+sauron = ('Sauron', 5000, ['killing hobbits', 'chess'])
+gandalf = ('Gandalf', 10000, ['waving wands', 'chess'])
+
+print(friend_date(elmo, sauron))  # Output: False
+print(friend_date(sauron, gandalf))  # Output: True
+
+#32
+def two_list_dictionary(keys, values):
+    """Create a dictionary from keys and values."""
+    result = {}
+
+    for i, key in enumerate(keys):
+        if i < len(values):
+            result[key] = values[i]
+        else:
+            result[key] = None
+
+    return result
+
+# Test cases
+print(two_list_dictionary(['x', 'y', 'z'], [9, 8, 7]))  # Output: {'x': 9, 'y': 8, 'z': 7}
+print(two_list_dictionary(['a', 'b', 'c', 'd'], [1, 2, 3]))  # Output: {'a': 1, 'b': 2, 'c': 3, 'd': None}
+print(two_list_dictionary(['a', 'b', 'c'], [1, 2, 3, 4]))  # Output: {'a': 1, 'b': 2, 'c': 3}
+
